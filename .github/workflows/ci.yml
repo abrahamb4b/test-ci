@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+      - release/staging
+  push:
+    branches:
+      - master
+      - release/staging
+
+jobs:
+  danger: 
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+
+      - name: Install danger
+        run: gem install danger
+
+      - name: Run danger
+        run: danger
+    env:
+      GITHUB_TOKEN: ${{ secrets.DANGER_GITHUB_TOKEN }}
+
+  rubocop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+
+      - name: Install rubocop
+        run: gem install rubocop -v 1.10.0
+
+      - name: Run rubocop
+        run: rubocop -c .rubocop.yml
+
+  brakeman:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+
+      - name: Install brakeman
+        run: gem install brakeman
+
+      - name: Run brakeman
+        run: brakeman
