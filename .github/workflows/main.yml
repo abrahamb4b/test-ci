@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: './sut'
-          repository: 'b4b-payments/bread4businessportal'
+          repository: 'git@github.com:b4b-payments/bread4businessportal.git'
           ref: 'release/staging'
           submodules: 'true'
       - name: Change to the checkedd out directory
