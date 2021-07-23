@@ -20,9 +20,12 @@ jobs:
       - name: Checkout B4B Portal
         uses: actions/checkout@v2
         with:
+          path: './sut'
           repository: 'b4b-payments/bread4businessportal'
           ref: 'release/staging'
           submodules: 'true'
+      - name: Change to the checkedd out directory
+        run: cd sut
       - name: Update the submodule
         run: git submodule update --init --recursive
       - name: Checkout correct PCSCORE
