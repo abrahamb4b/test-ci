@@ -23,9 +23,10 @@ jobs:
           repository: 'b4b-payments/bread4businessportal'
           ref: 'release/staging'
           submodules: 'true'
+      - name: Update the submodule
+        run: git submodule update --init --recursive
       - name: Checkout correct PCSCORE
         run: git submodule set-branch --branch ${GITHUB_REF##*/} -- lib/pcs_core
-        run: git submodule update --init --recursive
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
