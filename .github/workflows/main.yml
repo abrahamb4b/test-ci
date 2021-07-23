@@ -10,10 +10,11 @@ jobs:
       - name: Shutdown Ubuntu MySQL (SUDO)
         run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
       - name: Setup MariaDB  
-        uses: getong/mariadb-action@v10.3
+        uses: getong/mariadb-action@v1.1
         with:
           character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
           collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
+          mariadb version: '10.3' # Optional, default value is "latest". The version of the MariaDB
           mysql database: ' bread4businessportal_test' # Optional, default value is "test". The specified database which will be create
           mysql root password: ${{ secrets.test_db_root_password  }} # Required if "mysql user" is empty, default is empty. The root superuser password
       - name: Checkout B4B Portal
